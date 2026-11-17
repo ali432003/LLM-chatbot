@@ -46,14 +46,19 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
   }
 
   return (
-    <main className="auth-wrap">
-      <form className="auth-card" onSubmit={onSubmit}>
-        <h1>{isLogin ? "Welcome back" : "Create account"}</h1>
-        <p className="muted">
+    <main className="flex min-h-screen items-center justify-center bg-[var(--bg)] px-4">
+      <form
+        className="w-full max-w-sm bg-[var(--panel)] border border-[var(--border)] rounded-2xl p-8 flex flex-col gap-5 shadow-xl"
+        onSubmit={onSubmit}
+      >
+        <h1 className="text-2xl font-bold text-[var(--text)]">
+          {isLogin ? "Welcome back" : "Create account"}
+        </h1>
+        <p className="text-sm text-[var(--muted)] -mt-2">
           {isLogin ? "Log in to continue chatting." : "Sign up to start chatting."}
         </p>
 
-        <label>
+        <label className="flex flex-col gap-1 text-sm text-[var(--text)]">
           Email
           <input
             type="email"
@@ -61,9 +66,11 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
+            className="bg-[var(--panel-2)] border border-[var(--border)] rounded-lg px-3 py-2 text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition"
           />
         </label>
-        <label>
+
+        <label className="flex flex-col gap-1 text-sm text-[var(--text)]">
           Password
           <input
             type="password"
@@ -72,19 +79,27 @@ export default function AuthForm({ mode }: { mode: "login" | "signup" }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete={isLogin ? "current-password" : "new-password"}
+            className="bg-[var(--panel-2)] border border-[var(--border)] rounded-lg px-3 py-2 text-[var(--text)] placeholder:text-[var(--muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] transition"
           />
         </label>
 
-        {error && <p className="error">{error}</p>}
-        {info && <p className="info">{info}</p>}
+        {error && <p className="text-sm text-[var(--danger)]">{error}</p>}
+        {info && <p className="text-sm text-[var(--ok)]">{info}</p>}
 
-        <button type="submit" disabled={loading}>
+        <button
+          type="submit"
+          disabled={loading}
+          className="bg-[var(--accent)] text-[var(--accent-text)] font-semibold py-2.5 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+        >
           {loading ? "Please wait…" : isLogin ? "Log in" : "Sign up"}
         </button>
 
-        <p className="muted small">
+        <p className="text-sm text-[var(--muted)] text-center">
           {isLogin ? "No account? " : "Already have one? "}
-          <Link href={isLogin ? "/signup" : "/login"}>
+          <Link
+            href={isLogin ? "/signup" : "/login"}
+            className="text-[var(--accent)] underline underline-offset-2 hover:opacity-80"
+          >
             {isLogin ? "Sign up" : "Log in"}
           </Link>
         </p>

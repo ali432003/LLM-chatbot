@@ -12,7 +12,7 @@ export default function MarkdownRenderer({
   content,
 }: MarkdownRendererProps) {
   return (
-    <div className="markdown-content">
+    <div className="text-base lg:text-lg leading-relaxed text-[var(--text)]">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
